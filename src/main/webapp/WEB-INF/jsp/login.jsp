@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>系统登陆</title>
+    <title>聊天室</title>
 </head>
 <body>
-登录页面
+<label>内容</label>
+<div style="width: 800px; height: 600px;"></div>
 </body>
 </html>
