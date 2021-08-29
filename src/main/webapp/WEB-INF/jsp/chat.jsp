@@ -18,33 +18,35 @@
 <script src="<%=request.getContextPath()%>/static/js/jquery-3.5.1.min.js"></script>
 <script>
 
-    var url = "role_echo";
+    // var url = "http://localhost:8080/sse";
+    var url = "http://localhost:8080/sse/12";
 
     if (window.EventSource) {
-        var source = new EventSource('/role_echo');//发送消息
-        s = '';
 
-        source.addEventListener('message', function (e) {
+        var count = 0;
+        // 创建sse推送源
+        var sse = new EventSource(url);
 
-            console.log("接收消息");
-
-            s += e.data + "<br/>";
-            $("#msgFromPush").html(s);
-        }, false);//添加客户端的监听
-
-        source.addEventListener('open', function (e) {
-            console.log("连接打开");
-        }, false);
-
-        source.addEventListener('error', function (e) {
-            if (e.currentTarget.readyState == EventSource.CLOSED) {
-                console.log("连接关闭");
-            } else {
-                console.log(e.currentTarget.readyState);
+        sse.onmessage = function (e) {
+            // console.log("接收消息")
+            $("#msgFromPush").append(e.data||'');
+            count += 1;
+            if (count >=10) {
+                sse.close();
+                $("#msgFromPush").append("关闭")
             }
-        });
+        };
+        sse.onopen = function (e) {
+            // console.log("接收消息")
+            console.log("建立连接");
+        };
+        sse.onerror = function (e) {
+            // console.log("接收消息")
+            console.log("异常")
+        };
+
     } else {
-        console.log("您的浏览器不支持SSE");
+        alert("您的浏览器不支持SSE");
     }
 </script>
 </html>

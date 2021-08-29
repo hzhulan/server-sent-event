@@ -17,7 +17,7 @@ import java.util.Date;
  * @author: pp_lan
  * @date: 2021/8/29 14:39
  */
-@WebServlet(urlPatterns = { "/role_echo" }, asyncSupported = true)
+//@WebServlet(urlPatterns = { "/role_echo" }, asyncSupported = true)
 public class SseTest extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final static int DEFAULT_TIME_OUT = 10 * 60 * 1000;

@@ -1,7 +1,13 @@
 package com.fiberhome.base.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  * @description: 聊天室
@@ -16,17 +22,16 @@ public class ChatController {
         return "chat";
     }
 
-//    @RequestMapping(value = "/push", produces="text/event-stream")
-//    public @ResponseBody String sendMsg() {
-//        System.out.println("push msg..");
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        //注意：返回数据的格式要严格按照这样写，‘\n\n’不可少
-//        return "data:current time: " + new SimpleDateFormat("YYYY-MM-dd hh:mm:ss").format(new Date())+"\n\n";
-//    }
+    @RequestMapping(value = "/sse/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @ResponseBody
+    public String push(@PathVariable("id") Long id){
+        Random r = new SecureRandom();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "data:Testing 1,2,3" + r.nextInt() +"\n\n";
+    }
 
 }
