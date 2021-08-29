@@ -1,1 +1,1 @@
-server-sent event
+server-sent event demo
