@@ -1,12 +1,14 @@
 package com.fiberhome.base.controller;
 
+import com.fiberhome.base.service.ChatService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.security.SecureRandom;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.Random;
 
 /**
@@ -17,21 +19,33 @@ import java.util.Random;
 @Controller
 public class ChatController {
 
+    @Resource
+    private ChatService chatService;
+
     @RequestMapping("/index")
     public String chat() {
+        String test = chatService.test();
         return "chat";
     }
 
     @RequestMapping(value = "/sse/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @ResponseBody
-    public String push(@PathVariable("id") Long id){
-        Random r = new SecureRandom();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void push(@PathVariable("id") Long id, HttpServletResponse response){
+
+        response.setContentType("text/event-stream");
+        response.setCharacterEncoding("utf-8");
+
+        while (true) {
+            Random r = new Random();
+            try {
+                Thread.sleep(1000);
+                PrintWriter pw = response.getWriter();
+                pw.write("【user】:Testing 1,2,3" + r.nextInt() + "\n\n");
+                System.out.println("发送消息...");
+                pw.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return "data:Testing 1,2,3" + r.nextInt() +"\n\n";
     }
 
 }
