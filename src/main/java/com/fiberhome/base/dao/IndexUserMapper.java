@@ -1,5 +1,6 @@
 package com.fiberhome.base.dao;
 
+import com.fiberhome.base.model.IndexUser;
 import com.fiberhome.base.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,13 +13,11 @@ import java.util.List;
  * @date: 2021/9/8 7:26
  */
 @Repository
-public interface TUserMapper {
+public interface IndexUserMapper {
 
-    void insertUserInfo(@Param("user") User user);
-
-    List<User> selectByName(@Param("name") String name);
-
-    List<User> searchByName(@Param("name") String name);
-
-    void insert(@Param("name") String name);
+    /**
+     * 插入
+     * @param user
+     */
+    void insertUserInfo(@Param("user") IndexUser user);
 }

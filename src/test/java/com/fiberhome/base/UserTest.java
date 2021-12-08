@@ -28,10 +28,10 @@ public class UserTest {
     @Resource
     private TUserMapper tUserMapper;
 
-//    @Test
+    @Test
     public void test() {
 
-        for (int i = 1; i < 101; i++) {
+        for (int i = 1; i < 10; i++) {
             tUserMapper.insertUserInfo(new User(i, 20, "li" + i));
         }
 

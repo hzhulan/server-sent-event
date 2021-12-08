@@ -13,6 +13,8 @@ public class User {
 
     private String name;
 
+    private int sort;
+
     public User() {
     }
 
@@ -20,6 +22,13 @@ public class User {
         this.id = id;
         this.age = age;
         this.name = name;
+    }
+
+    public User(Integer id, Integer age, String name, int sort) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.sort = sort;
     }
 
     public Integer getId() {
