@@ -28,7 +28,7 @@ public class ChatController {
         return "chat";
     }
 
-    @RequestMapping(value = "/sse/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @RequestMapping(value = "/sse/{id}")
     public void push(@PathVariable("id") Long id, HttpServletResponse response){
 
         response.setContentType("text/event-stream");
@@ -39,8 +39,11 @@ public class ChatController {
             try {
                 Thread.sleep(1000);
                 PrintWriter pw = response.getWriter();
-                pw.write("【user】:Testing 1,2,3" + r.nextInt() + "\n\n");
-                System.out.println("发送消息...");
+                String msg = "消息" + r.nextInt();
+
+                pw.write("data:" + msg + "\n\n");
+
+                System.out.println("发送消息: " + msg);
                 pw.flush();
             } catch (Exception e) {
                 e.printStackTrace();

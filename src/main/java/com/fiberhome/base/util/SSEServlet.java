@@ -14,7 +14,7 @@ import java.util.Date;
  * @author: pp_lan
  * @date: 2021/8/29 14:39
  */
-@WebServlet("/sse")
+//@WebServlet("/sse")
 public class SSEServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
