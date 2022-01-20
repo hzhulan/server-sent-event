@@ -66,6 +66,7 @@ public class SseTest extends HttpServlet {
             this.ctx = ctx;
         }
 
+        @Override
         public void run() {
             try {
                 //等待十秒钟，以模拟业务方法的执行
