@@ -11,6 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.annotation.Resource;
 import java.net.SecureCacheResponse;
 import java.security.SecureRandom;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -54,11 +55,15 @@ public class IndexTest {
      );
      */
     @Test
-    public void create() {
+    public void create() throws InterruptedException {
         SecureRandom random = new SecureRandom();
-        for (int i = 0; i < 100000; i++) {
+        int start = 100001;
+        for (int i = start; i < 100000; i++) {
             int ageIncrease = random.nextInt(10);
             indexUserMapper.insertUserInfo(new IndexUser(i, "张三"+i, "张三的小号", 20 + ageIncrease, i));
         }
+        TimeUnit.MINUTES.sleep(10);
     }
+
+
 }
